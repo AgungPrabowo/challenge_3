@@ -1,6 +1,6 @@
-import 'package:challenge_3/apiServices.dart';
-import 'package:challenge_3/helper.dart';
-import 'package:challenge_3/model/modelCountries.dart';
+import 'package:challenge_3/src/api/apiServices.dart';
+import 'package:challenge_3/src/helper/helper.dart';
+import 'package:challenge_3/src/model/modelCountries.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flag/flag.dart';
@@ -63,6 +63,10 @@ class _MyHomePageState extends State<MyHomePage> {
             case ConnectionState.active:
               return Text("");
               break;
+            default:
+              return Container(
+                child: Text("Data not found"),
+              );
           }
         },
       ),

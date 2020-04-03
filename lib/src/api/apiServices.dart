@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:challenge_3/model/modelCountries.dart';
+import 'package:challenge_3/src/model/modelCountries.dart';
 import 'package:http/http.dart' as http;
 
 class ApiServices {

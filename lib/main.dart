@@ -1,4 +1,4 @@
-import 'package:challenge_3/home.dart';
+import 'package:challenge_3/src/ui/home.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'COVID-19 Map'),
+      home: MyHomePage(title: 'COVID-19 Map Marker'),
     );
   }
 }
