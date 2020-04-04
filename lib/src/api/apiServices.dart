@@ -20,7 +20,7 @@ class ApiServices {
     }
   }
 
-  Future<ModelNews> coronaNews({String location: "US"}) async {
+  Future<ModelNews> coronaNews(String location) async {
     final String url =
         "https://api.smartable.ai/coronavirus/news/${location.toUpperCase()}";
     final Map<String, String> headers = {

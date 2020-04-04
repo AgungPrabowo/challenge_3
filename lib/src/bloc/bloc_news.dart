@@ -29,12 +29,10 @@ class DataNews extends NewsState {
 
 abstract class NewsEvent {}
 
-class FetchNews extends NewsEvent {
+class InitData extends NewsEvent {
   final String idCountry;
-  FetchNews(this.idCountry);
+  InitData({this.idCountry});
 }
-
-class InitData extends NewsEvent {}
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   @override
@@ -46,7 +44,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     if (event is InitData) {
       yield NewsLoading();
       List<ModelCountries> data = await apiServices.coronaCountries();
-      ModelNews news = await apiServices.coronaNews();
+      ModelNews news = await apiServices.coronaNews(event.idCountry);
       List<String> countries = data.map((f) => f.country).toSet().toList();
       List<String> countryCode =
           data.map((f) => f.countryCode).toSet().toList();

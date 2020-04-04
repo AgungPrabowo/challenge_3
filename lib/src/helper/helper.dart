@@ -11,15 +11,15 @@ class Helper {
         children: <Widget>[
           DrawerHeader(
             child: FlutterLogo(
-              colors: Colors.red,
+              colors: Colors.grey,
             ),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.grey[800],
             ),
           ),
           ListTile(
             title: Text(
-              'Corona Virus Tracker',
+              'COVID-19 Virus Tracker',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             onTap: () {
@@ -31,13 +31,13 @@ class Helper {
           ),
           ListTile(
             title: Text(
-              'Corona News',
+              'COVID-19 News by Country',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             onTap: () {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => News()),
+                  MaterialPageRoute(builder: (context) => NewsUI()),
                   (Route<dynamic> route) => false);
             },
           ),
