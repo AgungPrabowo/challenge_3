@@ -1,4 +1,5 @@
 import 'package:challenge_3/main.dart';
+import 'package:challenge_3/src/ui/charts.dart';
 import 'package:challenge_3/src/ui/news.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -38,6 +39,20 @@ class Helper {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => NewsUI()),
+                  (Route<dynamic> route) => false);
+            },
+          ),
+          ListTile(
+            title: Text(
+              'COVID-19 Charts',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            onTap: () {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ReportChartUI(),
+                  ),
                   (Route<dynamic> route) => false);
             },
           ),

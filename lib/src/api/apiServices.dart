@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:challenge_3/src/model/modelConfirmed.dart';
 import 'package:challenge_3/src/model/modelCountries.dart';
+import 'package:challenge_3/src/model/modelDeaths.dart';
 import 'package:challenge_3/src/model/modelNews.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,6 +19,7 @@ class ApiServices {
       return dataCorona;
     } catch (e) {
       print(e);
+      return List<ModelCountries>();
     }
   }
 
@@ -33,6 +36,35 @@ class ApiServices {
       return dataNews;
     } catch (e) {
       print(e);
+      return ModelNews();
+    }
+  }
+
+  Future<List<ModelConfirmed>> coronaConfirmed(String location) async {
+    try {
+      final response = await client.get(
+          "https://api.covid19api.com/dayone/country/${location.toUpperCase()}/status/confirmed");
+      final result = json.decode(response.body);
+      List<ModelConfirmed> dataConfirmed =
+          (result as List).map((f) => ModelConfirmed.fromJson(f)).toList();
+      return dataConfirmed;
+    } catch (e) {
+      print(e);
+      return List<ModelConfirmed>();
+    }
+  }
+
+  Future<List<ModelDeaths>> coronaDeaths(String location) async {
+    try {
+      final response = await client.get(
+          "https://api.covid19api.com/dayone/country/${location.toUpperCase()}/status/deaths");
+      final result = json.decode(response.body);
+      List<ModelDeaths> dataDeaths =
+          (result as List).map((f) => ModelDeaths.fromJson(f)).toList();
+      return dataDeaths;
+    } catch (e) {
+      print(e);
+      return List<ModelDeaths>();
     }
   }
 }
