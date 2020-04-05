@@ -4,6 +4,7 @@ import 'package:challenge_3/src/model/modelCountries.dart';
 import 'package:challenge_3/src/model/modelDeaths.dart';
 import 'package:challenge_3/src/model/modelNews.dart';
 import 'package:challenge_3/src/model/modelSummary.dart';
+import 'package:challenge_3/src/model/modelYoutube.dart';
 import 'package:http/http.dart' as http;
 
 class ApiServices {
@@ -78,6 +79,19 @@ class ApiServices {
     } catch (e) {
       print(e);
       return ModelSummary();
+    }
+  }
+
+  Future<ModelYoutube> coronaYoutube(String count) async {
+    try {
+      final response = await client.get(
+          "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBOVlHFNYRuLIYy34GUHEamrxlMnmyIlNk&channelId=UC07-dOwgza1IguKA86jqxNA&part=snippet,id&order=date&maxResults=${count}");
+      final result = json.decode(response.body);
+      ModelYoutube dataYoutube = ModelYoutube.fromJson(result);
+      return dataYoutube;
+    } catch (e) {
+      print(e);
+      return ModelYoutube();
     }
   }
 }
