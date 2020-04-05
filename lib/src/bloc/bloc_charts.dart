@@ -2,6 +2,7 @@ import 'package:challenge_3/src/api/apiServices.dart';
 import 'package:challenge_3/src/model/modelConfirmed.dart';
 import 'package:challenge_3/src/model/modelCountries.dart';
 import 'package:challenge_3/src/model/modelDeaths.dart';
+import 'package:challenge_3/src/model/modelSummary.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class ChartsState {}
@@ -15,11 +16,18 @@ class DataInit extends ChartsState {
   List<String> countryCode;
   List<ModelConfirmed> confirmed;
   List<ModelDeaths> deaths;
-  DataInit(this.countries, this.countryCode, this.confirmed, this.deaths);
+  Countries country;
+  DataInit(this.countries, this.countryCode, this.confirmed, this.deaths,
+      this.country);
 
-  DataInit copyWith(List<String> countries, List<String> countryCode,
-          List<ModelConfirmed> confirmed, List<ModelDeaths> deaths) =>
-      DataInit(countries, countryCode, confirmed, deaths);
+  DataInit copyWith(
+    List<String> countries,
+    List<String> countryCode,
+    List<ModelConfirmed> confirmed,
+    List<ModelDeaths> deaths,
+    Countries country,
+  ) =>
+      DataInit(countries, countryCode, confirmed, deaths, country);
 }
 
 abstract class ChartsEvent {}
@@ -43,10 +51,19 @@ class ChartsBloc extends Bloc<ChartsEvent, ChartsState> {
           await apiServices.coronaConfirmed(event.idCountry);
       List<ModelDeaths> dataDeaths =
           await apiServices.coronaDeaths(event.idCountry);
+      ModelSummary dataSummary = await apiServices.coronaSummary();
       List<String> countries = data.map((f) => f.country).toSet().toList();
       List<String> countryCode =
           data.map((f) => f.countryCode).toSet().toList();
-      yield DataInit(countries, countryCode, dataConfirmed, dataDeaths);
+      Countries country = dataSummary.countries.singleWhere(
+          (f) => f.countryCode.toUpperCase() == event.idCountry.toUpperCase());
+      yield DataInit(
+        countries,
+        countryCode,
+        dataConfirmed,
+        dataDeaths,
+        country,
+      );
     }
   }
 }

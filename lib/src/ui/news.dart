@@ -147,13 +147,7 @@ class _SearchCountries extends State<SearchCountries> {
     return BlocBuilder<NewsBloc, NewsState>(
       builder: (context, state) {
         newsBloc = BlocProvider.of<NewsBloc>(context);
-        if (state is NewsLoading) {
-          return Center(
-            child: Platform.isAndroid
-                ? CircularProgressIndicator()
-                : CupertinoActivityIndicator(),
-          );
-        } else if (state is DataInit) {
+        if (state is DataInit) {
           return Form(
             key: _formKey,
             child: Container(
@@ -201,9 +195,7 @@ class _SearchCountries extends State<SearchCountries> {
             ),
           );
         } else {
-          return Container(
-            child: Text("data"),
-          );
+          return Container();
         }
       },
     );

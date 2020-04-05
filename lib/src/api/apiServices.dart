@@ -3,6 +3,7 @@ import 'package:challenge_3/src/model/modelConfirmed.dart';
 import 'package:challenge_3/src/model/modelCountries.dart';
 import 'package:challenge_3/src/model/modelDeaths.dart';
 import 'package:challenge_3/src/model/modelNews.dart';
+import 'package:challenge_3/src/model/modelSummary.dart';
 import 'package:http/http.dart' as http;
 
 class ApiServices {
@@ -65,6 +66,18 @@ class ApiServices {
     } catch (e) {
       print(e);
       return List<ModelDeaths>();
+    }
+  }
+
+  Future<ModelSummary> coronaSummary() async {
+    try {
+      final response = await client.get("https://api.covid19api.com/summary");
+      final result = json.decode(response.body);
+      ModelSummary dataSummary = ModelSummary.fromJson(result);
+      return dataSummary;
+    } catch (e) {
+      print(e);
+      return ModelSummary();
     }
   }
 }
