@@ -18,37 +18,24 @@ class NewsUI extends StatelessWidget {
     MediaQueryData mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("COVID-19 News Today"),
+      ),
       key: scaffoldState,
       body: BlocProvider<NewsBloc>(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Color(0xFFF1F5F9),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                ),
-              ),
-              padding: EdgeInsets.only(
-                top: mediaQuery.padding.top + 16.0,
-                bottom: 16.0,
-              ),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      WidgetTitle(strToday),
-                    ],
-                  ),
-                  SizedBox(height: 8.0),
-                  buildWidgetSearch(),
-                  SizedBox(height: 12.0),
-                ],
-              ),
-            ),
+            buildWidgetSearch(),
             SizedBox(height: 16.0),
+            Container(
+              child: Text(
+                strToday,
+                style: TextStyle(color: Color(0xFF325384).withOpacity(0.8)),
+              ),
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: 15),
+            ),
             _buildWidgetLabelLatestNews(context),
             _buildWidgetSubtitleLatestNews(context),
             Expanded(
@@ -198,42 +185,6 @@ class _SearchCountries extends State<SearchCountries> {
           return Container();
         }
       },
-    );
-  }
-}
-
-class WidgetTitle extends StatelessWidget {
-  final String strToday;
-
-  WidgetTitle(this.strToday);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: 'COVID-19 News Today\n',
-                style: Theme.of(context).textTheme.title.merge(
-                      TextStyle(color: Color(0xFF325384), fontSize: 19),
-                    ),
-              ),
-              TextSpan(
-                text: strToday,
-                style: Theme.of(context).textTheme.caption.merge(
-                      TextStyle(
-                        color: Color(0xFF325384).withOpacity(0.8),
-                        fontSize: 10.0,
-                      ),
-                    ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
