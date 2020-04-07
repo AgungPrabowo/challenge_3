@@ -25,4 +25,4 @@ flutter build apk --release
 ```
 
 ### Demo Application
-See [video demo](https://youtu.be/ugGFxmIm-nU)
+See [video demo](https://youtu.be/HyJ3RHKng5k)
